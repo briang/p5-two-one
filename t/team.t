@@ -27,6 +27,7 @@ use TwoOne::Team;
 
 my $team = TwoOne::Team->new(
     name => 'New New York Manglers',
+    formation => 433,
 );
 
 # keeper
@@ -48,9 +49,20 @@ $team->add_player( TwoOne::Player->new( name => 'player09', G => 1, D => 1, M =>
 $team->add_player( TwoOne::Player->new( name => 'player10', G => 1, D => 1, M => 1, A => 3 ) );
 $team->add_player( TwoOne::Player->new( name => 'player11', G => 1, D => 1, M => 1, A => 2 ) );
 
-is $team->gk_rating, 3, '3 goalkeeping';
-is $team->def_rating, 11 + 3/2, '14.5 defence';
-is $team->mid_rating, 7, '7 midfield';
-is $team->atk_rating, 8 + 2, '10 attack';
+diag "433";
+
+is $team->goalkeeper_rating, 3, '3 goalkeeping';
+is $team->defence_rating, 11 + 3/2, '12.5 defence';
+is $team->midfield_rating, 7, '7 midfield';
+is $team->attack_rating, 8 + 2, '10 attack';
+
+diag "541";
+
+$team->formation(541);
+
+is $team->goalkeeper_rating, 3, '3 goalkeeping';
+is $team->defence_rating, 12 + 2, '14 defence';
+is $team->midfield_rating, 6, '6 midfield';
+is $team->attack_rating, 2 + 9/2, '6.5 attack';
 
 done_testing;
