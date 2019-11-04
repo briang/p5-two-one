@@ -45,21 +45,21 @@ sub add_player($self, $player) {
 }
 
 sub goalkeeper_rating($self) {
-    return sum map( { $_->gk_skill } $self->goalkeeper );
+    return sum map( { $_->goalkeeper_skill } $self->goalkeeper );
 }
 
 sub defence_rating($self) {
-    return sum map( { $_->def_skill     } $self->defenders ),
-               map( { $_->def_skill / 2 } $self->midfielders )
+    return sum map( { $_->defence_skill     } $self->defenders ),
+               map( { $_->defence_skill / 2 } $self->midfielders )
 }
 
 sub midfield_rating($self) {
-    return sum map( { $_->mid_skill } $self->midfielders )
+    return sum map( { $_->midfield_skill } $self->midfielders )
 }
 
 sub attack_rating($self) {
-    return sum map( { $_->atk_skill     } $self->attackers),
-               map( { $_->atk_skill / 2 } $self->midfielders )
+    return sum map( { $_->attack_skill     } $self->attackers),
+               map( { $_->attack_skill / 2 } $self->midfielders )
 }
 
 sub goalkeeper($self)  { @{$self->players}[$self->goalkeeper_indices->@*] }

@@ -10,14 +10,15 @@ use experimental 'signatures';
 ########################################################################
 has name => qw(is ro required 1);
 
-has [qw<atk_skill def_skill mid_skill gk_skill>] => qw(is ro required 1);
+has [qw<attack_skill defence_skill midfield_skill goalkeeper_skill>]
+  => qw(is ro required 1);
 
 sub BUILDARGS($self, %args) {
     return {
-        gk_skill  => delete $args{G},
-        def_skill => delete $args{D},
-        mid_skill => delete $args{M},
-        atk_skill => delete $args{A},
+        goalkeeper_skill => delete $args{G},
+        defence_skill    => delete $args{D},
+        midfield_skill   => delete $args{M},
+        attack_skill     => delete $args{A},
         %args
     }
 }
