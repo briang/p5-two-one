@@ -69,4 +69,29 @@ sub defenders($self)   { @{$self->players}[$self->defender_indices->@*  ] }
 sub midfielders($self) { @{$self->players}[$self->midfielder_indices->@*] }
 sub attackers($self)   { @{$self->players}[$self->attacker_indices->@*  ] }
 
+sub unused_players($self) { grep { $_->{position} eq '' } @{ $self->players } }
+
+sub choose_players_for_position($self, $position) {
+    my @formation = (1, split //, $self->formation);
+
+    my $skill = "${position}_skill";
+    if ($position eq 'goalkeeper') {
+        $_->position($position)
+          for +(sort { $b->$skill <=> $a->$skill } $self->unused_players)[0..$formation[0]-1];
+    }
+    elsif ($position eq 'defence') {
+        $_->position($position)
+          for +(sort { $b->$skill <=> $a->$skill } $self->unused_players)[0..$formation[1]-1];
+    }
+    elsif ($position eq 'midfielder') {
+        $_->position($position)
+          for +(sort { $b->$skill <=> $a->$skill } $self->unused_players)[0..$formation[2]-1];
+    }
+    elsif ($position eq 'attacker')   {
+        $_->position($position)
+          for +(sort { $b->$skill <=> $a->$skill } $self->unused_players)[0..$formation[3]-1];
+    }
+    else { die };
+}
+
 1;
