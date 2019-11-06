@@ -10,8 +10,12 @@ use experimental 'signatures';
 ########################################################################
 has name => qw(is ro required 1);
 
-has [qw<attack_skill defence_skill midfield_skill goalkeeper_skill>]
-  => qw(is ro required 1);
+has name             => qw(is ro required 1);
+has attack_skill     => qw(is ro required 1);
+has defence_skill    => qw(is ro required 1);
+has goalkeeper_skill => qw(is ro required 1);
+has midfield_skill   => qw(is ro required 1);
+has position         => qw(is rw), default => '';
 
 sub BUILDARGS($self, %args) {
     return {

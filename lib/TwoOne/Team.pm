@@ -11,12 +11,14 @@ use experimental 'signatures';
 use List::Util 'sum';
 use Carp 'croak';
 
-has name      => qw(is ro required 1);
-has players   => qw(is ro), default => sub { [] };
-has formation => qw(is rw required 1 trigger 1);
+has name               => qw(is ro required 1);
+has players            => qw(is ro), default => sub { [] };
+has formation          => qw(is rw required 1 trigger 1);
 
-has [qw/goalkeeper_indices defender_indices midfielder_indices attacker_indices/],
-  qw(is rwp);
+has attacker_indices   => qw(is rwp);
+has defender_indices   => qw(is rwp);
+has goalkeeper_indices => qw(is rwp);
+has midfielder_indices => qw(is rwp);
 
 sub _trigger_formation($self, $formation) {
     croak "formation is a single integer"
