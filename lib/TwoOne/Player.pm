@@ -8,7 +8,8 @@ use namespace::clean;
 use MooX::StrictConstructor;
 use experimental 'signatures';
 ########################################################################
-has name => qw(is ro required 1);
+use List::Util 'max';
+use Math::Random 'random_normal';
 
 has name             => qw(is ro required 1);
 has attack_skill     => qw(is ro required 1);
@@ -25,6 +26,16 @@ sub BUILDARGS($self, %args) {
         attack_skill     => delete $args{A},
         %args
     }
+}
+
+sub new_random_player($self, $name) {
+    return $self->new(
+        name             => $name,
+        goalkeeper_skill => max( 5, random_normal(1, 20, 10) ),
+        defence_skill    => max( 5, random_normal(1, 20, 10) ),
+        midfield_skill   => max( 5, random_normal(1, 20, 10) ),
+        attack_skill     => max( 5, random_normal(1, 20, 10) ),
+    );
 }
 
 1;
