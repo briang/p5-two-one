@@ -1,0 +1,15 @@
+* Attendances
+*** footballwebpages.co.uk
+* google "english league 2 ground capacities"
+* tansfermarkt.co.uk (that spelling *is* correct)
+* numberphile: A Million Simulated Seasons
+*** https://www.youtube.com/watch?v=Vv9wpQIGZDw
+*** https://www.youtube.com/watch?v=Zs2M7gWSbTg
+* Game data
+*** http://www.football-data.co.uk/englandm.php
+* Simulation
+*** https://www.pinnacle.com/en/betting-articles/Soccer/how-to-calculate-poisson-distribution/MD62MLXUMKMXZ6A8
+*** Formula above is inaccurate - should be: P(Lambda, k) = e^(-Lambda) * Lambda^k / k!
+*** Poisson distribution
+*** Lambda = expected number of goals per game (ie average)
+*** P(Lambda, k) = probability of scoring k goals
