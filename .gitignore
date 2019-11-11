@@ -93,5 +93,6 @@ flycheck_*.el
 
 *.bak
 
+two-one.db
 eplsim
 spacegame
