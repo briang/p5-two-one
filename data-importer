@@ -1,0 +1,38 @@
+#!/bin/bash
+
+FIRSTNAMES_F='data/first-names-female'
+FIRSTNAMES_M='data/first-names-male'
+LASTNAMES='data/last-names'
+PLACES='data/places.csv'
+SUFFIXES='data/suffixes'
+
+DB='two-one.db'
+SQLITE=sqlite3
+
+[ -e $DB ] && rm $DB
+
+$SQLITE $DB ".mode csv" ".import $FIRSTNAMES_F firstnames"
+$SQLITE $DB ".mode csv" ".import $FIRSTNAMES_M firstnames"
+$SQLITE $DB ".mode csv" ".import $LASTNAMES    lastnames"
+$SQLITE $DB ".mode csv" ".import $SUFFIXES     suffixes"
+
+$SQLITE $DB <<EOF
+CREATE TEMPORARY TABLE temp (
+  "name" TEXT,
+  "type" TEXT,
+  "country" TEXT
+);
+.mode csv
+.import $PLACES temp
+
+CREATE TABLE places
+AS
+SELECT DISTINCT(name)
+FROM temp
+WHERE country='England'
+AND LENGTH(name) <= 12;
+
+DROP TABLE temp;
+
+VACUUM;
+EOF
