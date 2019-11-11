@@ -36,3 +36,10 @@ DROP TABLE temp;
 
 VACUUM;
 EOF
+
+$SQLITE $DB <<EOF
+SELECT "firstnames", COUNT(*) FROM firstnames;
+SELECT "lastnames",  COUNT(*) FROM lastnames;
+SELECT "places",     COUNT(*) FROM places;
+SELECT "suffixes",   COUNT(*) FROM suffixes;
+EOF
