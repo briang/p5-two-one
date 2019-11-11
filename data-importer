@@ -15,15 +15,10 @@ $SQLITE $DB ".mode csv" ".import $FIRSTNAMES_F firstnames"
 $SQLITE $DB ".mode csv" ".import $FIRSTNAMES_M firstnames"
 $SQLITE $DB ".mode csv" ".import $LASTNAMES    lastnames"
 $SQLITE $DB ".mode csv" ".import $SUFFIXES     suffixes"
+$SQLITE $DB ".mode csv" ".import $PLACES       temp"
 
 $SQLITE $DB <<EOF
-CREATE TEMPORARY TABLE temp (
-  "name" TEXT,
-  "type" TEXT,
-  "country" TEXT
-);
 .mode csv
-.import $PLACES temp
 
 CREATE TABLE places
 AS
