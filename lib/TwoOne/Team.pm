@@ -91,7 +91,7 @@ sub choose_players_for_position($self, $position) {
         $_->position($position)
           for +(sort { $b->$skill <=> $a->$skill } $self->unused_players)[0..$formation[3]-1];
     }
-    else { die };
+    else { die "unknown position ($position)" };
 }
 
 1;
